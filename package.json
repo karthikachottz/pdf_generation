@@ -1,0 +1,17 @@
+{
+  "name": "pdfgenerate",
+  "version": "1.0.0",
+  "main": "new2-35.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "express": "^4.19.2",
+    "pdfkit": "^0.15.0",
+    "puppeteer": "^22.10.0"
+  }
+}
