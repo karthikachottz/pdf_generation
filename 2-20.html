@@ -6118,7 +6118,7 @@ b1.trim()=='' ||b2.trim()=='' ||b3.trim()=='' ||b4.trim()=='' ||b5.trim()==''
                                 document.getElementById('generatePDFButton').addEventListener('click', async () => {
                                     if (validateForm()) {
                                         // Send a POST request to the server to generate the PDF
-                                        const response = await fetch('/generate-pdf', {
+                                        const response = await fetch('http://localhost:3000/generate-pdf', {
                                             method: 'POST',
                                             headers: {
                                                 'Content-Type': 'application/json'
