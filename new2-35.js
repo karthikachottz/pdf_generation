@@ -3586,9 +3586,9 @@ Diagnostic Web Page.
     <td rowspan="5" style="text-align: center;width:5%;">7</td>
     <td style="width:20%;">Solid wheel</td>
    
-    <td rowspan="7">${d2}</td>
+    <td rowspan="5">${d2}</td>
  
-    <td rowspan="7">${rem2}</td>
+    <td rowspan="5">${rem2}</td>
     
 </tr>
 <tr><td>Wheel dia with flange</td></tr>
