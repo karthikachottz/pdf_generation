@@ -515,16 +515,14 @@ app.post('/generate-pdf', async (req, res) => {
             <div class="container">
                 <div class="signature-container left">
                     <div class="signature">
-                        <label for="signatureImage1" class="upload-button" id="uploadButton1"></label>
-                        <input type="file" id="signatureImage1" accept="image/*" required>
+                       
                         <p>Signature of Siemens Representative:</p>
                         <p>With Name, Designation & Date</p>
                     </div>
                 </div>
                 <div class="signature-container right">
                     <div class="rsign">
-                        <label for="signatureImage2" class="upload-button" id="uploadButton2"></label>
-                        <input type="file" id="signatureImage2" accept="image/*" required>
+                      
                         <p>Signature of Railway Representative:</p>
                         <p>With Name, Designation & Date</p>
                     </div>
