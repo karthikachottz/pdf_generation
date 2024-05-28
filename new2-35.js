@@ -305,7 +305,7 @@ app.post('/generate-pdf', async (req, res) => {
                 
             </tr>
         </table>
-        <img src="http://localhost:3000/image1" style="width: 5%;height: 5%; padding-left: 590px;padding-top: 10px;" alt="Description">
+        <img src="/image1" style="width: 5%;height: 5%; padding-left: 590px;padding-top: 10px;" alt="Description">
 
             <p style="padding-left: 65px;text-align: center;font-size: large;"><b>SIGNAL DIRECTORATE
             </b></p><br>
@@ -1387,7 +1387,7 @@ line. <br>
     <p  style="padding-left: 75px;"><b>Power supply and switch on the power supply. 
     </b></p>
     <div class="image-container">
-        <img src="http://localhost:3000/image2" alt="Description of the image" class="responsive-image">
+        <img src="/image2" alt="Description of the image" class="responsive-image">
 
     </div>
     <div class="container">
@@ -3412,7 +3412,7 @@ Diagnostic Web Page.
 <p style="padding-left: 65px;text-decoration: underline;"><b><u>Temperature correction factor for conductor resistance for annealed high conductivity copper.</u>
 
 </b></p>
-<img src="http://localhost:3000/image3" style="width: 95%; padding: 29px;" alt="Description">
+<img src="/image3" style="width: 95%; padding: 29px;" alt="Description">
     
 
  
@@ -3700,7 +3700,7 @@ Diagnostic Web Page.
     <br>
     <br>
     <div class="image-container">
-        <img src="http://localhost:3000/image4" alt="Description of the image" class="responsive-image">
+        <img src="/image4" alt="Description of the image" class="responsive-image">
 
     </div>
  
@@ -4351,7 +4351,7 @@ inductive elements that impede quick discharge of transients and surges to groun
 <p style="padding-left: 75px;">Connect the ACM module to configuration PC. Open version window on menu bar and check ACM software MD4 as 
 shown in below screen.</p>
 <div class="image-container">
-        <img src="http://localhost:3000/image6" alt="Description of the image" class="responsive-image">
+        <img src="/image6" alt="Description of the image" class="responsive-image">
 
     </div>
 <div class="container">
@@ -4395,7 +4395,7 @@ shown in below screen.</p>
 
 
     </b></p>
-    <img src="http://localhost:3000/image5" style="width: 95%; padding: 29px;" alt="Description">
+    <img src="/image5" style="width: 95%; padding: 29px;" alt="Description">
     
 
    
@@ -4438,7 +4438,7 @@ shown in below screen.</p>
 </u></b></P>
 <p style="padding-left: 75px;"><b>Diagnostic PC System Requirements: </b></p>
 <div class="image-container">
-        <img src="http://localhost:3000/image7" alt="Description of the image" class="responsive-image">
+        <img src="/image7" alt="Description of the image" class="responsive-image">
 
     </div>
 <p  style="padding-left: 75px;"><b>Note: Perstation one diagnostic PC is required for Diagnosis and Configuration purpose of ACM 200 via Webpage.</b></p>
@@ -4672,8 +4672,8 @@ shown in below screen.</p>
         // Generate PDF
        // Generate PDF
        await page.evaluate(() => {
-        document.querySelector('img[src="http://localhost:3000/image1"]').src = 'http://localhost:3000/image1'; // Replace placeholder1 with the actual URL
-        document.querySelector('img[src="http://localhost:3000/image2"]').src = 'http://localhost:3000/image2'; // Replace placeholder2 with the actual URL
+        document.querySelector('img[src="/image1"]').src = '/image1'; // Replace placeholder1 with the actual URL
+        document.querySelector('img[src="/image2"]').src = '/image2'; // Replace placeholder2 with the actual URL
         // Add more lines to replace placeholders for additional images
       });
        const pdfBuffer = await page.pdf({
