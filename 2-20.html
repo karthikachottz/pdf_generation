@@ -100,84 +100,74 @@ td::after {
     text-align: left; /* Align text to the left */
 }
 
-.signature-container {
-            flex: 1; /* Take up equal space within the container */
-            margin: 0 40px; /* Adjust margin as needed */
-            display: flex; /* Use flexbox for internal alignment */
-            flex-direction: row; /* Arrange items vertically */
-        }
-        
-        .signature-container.left {
-            justify-content: flex-start;
-            bottom: 0px; /* Align items to the start (top) */
-        }
-        
-        .signature-container.right {
-            justify-content: flex-end;
-             /* Align items to the end (bottom) */
-        }
+
+html, body {
+    height: 100%; /* Make sure the height of html and body is 100% */
+    margin: 0; /* Remove default margin */
+}
+
+body {
+    display: flex;
+    flex-direction: column; /* Arrange body content in a column */
+}
+
+/* Main content should take up all available space except for the footer */
+.main-content {
+    flex: 1; /* Main content takes up remaining space */
+}
+
+/* Footer styling */
+.custom-footer {
+    background-color: white; /* Set the background color of the footer */
+    padding: 20px 50px; /* Adjust padding for positioning */
+    text-align: center; /* Center align the content */
+    display: flex; /* Use flexbox for the footer */
+    justify-content: center; /* Center the footer content */
+    position: relative; /* Ensure the footer is positioned properly */
+    /* Push the footer to the bottom */
+}
+
+/* Container styling */
 .container {
     display: flex;
     justify-content: space-between; /* Distribute space between the signature containers */
-    padding: 0 100px; /* Adjust padding to move the right signature container more to the right */
+    width: 100%; /* Ensure the container takes full width */
+    max-width: 1400px; /* Optional: max width for better layout */
+    padding: 0 10px; /* Adjust padding to move the right signature container more to the right */
 }
 
+/* Signature container styling */
+.signature-container {
+    flex: 1; /* Take up equal space within the container */
+    display: flex; /* Use flexbox for internal alignment */
+    flex-direction: column; /* Arrange items vertically */
+}
 
-.container {
-            display: flex;
-            justify-content: space-between; /* Distribute space between the signature containers */
-            padding: 0 100px; /* Adjust padding to move the right signature container more to the right */
-        }
-        
-        
-        .signature {
-            font-size: 13px;
-            text-align: left;
-            margin-left: 55px; 
-            bottom: 0px;
-        }
-        
-        .rsign {
-            font-size: 13px;
-            text-align: right;
-            position: relative;
-            padding-top: 10px;
-            margin-right: 58px; /* Adjust margin-right to create space for the image */
-        }
-        
-        .rsign img {
-            max-width: 100px; /* Adjust image size as needed */
-            display: block;
-            margin: 0 auto; /* Center the image horizontally within the container */
-        }
-        
-        .rsign .upload-button {
-            margin-left: 20px; /* Add spacing between the image and text */
-            display: inline-block;
-            width: 100px;
-            height: 100px;
-            background-color: #ffffff;
-            background-size: cover;
-            background-position: center;
-           
-        }
-        
-        
-        .upload-button {
-            display: inline-block;
-            width: 100px; /* Set the width of the upload button */
-            height: 100px; /* Set the height of the upload button */
-            background-color: #ffffff; /* Set background color for the upload button */
-            background-size: cover; /* Ensure the background image covers the button */
-            background-position: center;
-            bottom: 0px;
-            margin-top: 50px; /* Center the background image */
-        }
-  /* Style to hide the file input */
-  input[type="file"] {
-            display: none;
-        }
-       
+.signature-container.left {
+    justify-content: flex-start; /* Align items to the start (top) */
+    margin-right: 20px; /* Adjust margin as needed */
+}
+
+.signature-container.right {
+    justify-content: flex-end; /* Align items to the end (bottom) */
+    margin-left: 20px; /* Adjust margin as needed */
+}
+
+/* Signature and related content styling */
+.signature,
+.rsign {
+    font-size: 13px; /* Set the font size */
+    text-align: center; /* Center align the text */
+    margin-bottom: 0px; /* Add spacing between signature content */
+}
+
+/* Upload button styling */
+
+
+/* Hide the file input */
+input[type="file"] {
+    display: none; /* Hide the file input */
+}
 
 
   table {
@@ -230,7 +220,7 @@ td::after {
                 
             </tr>
         </table>
-        <img src="/images/nationalemb.png" style="width: 5%;height: 5%; padding-left: 675px;padding-top: 10px;" alt="Description">
+        <img src="http://localhost:3000/image1" style="width: 5%;height: 5%; padding-left: 590px;padding-top: 10px;" alt="Description">
 
             <p style="padding-left: 65px;text-align: center;font-size: large;"><b>SIGNAL DIRECTORATE
             </b></p><br>
@@ -467,27 +457,27 @@ td::after {
         <br>
         <br>
     
-        <div class="container">
-            <div class="signature-container left">
-                <div class="signature">
-                    <label for="signatureImage1" class="upload-button" id="uploadButton1"></label>
-                    <input type="file" id="signatureImage1" accept="image/*" required>
-
-                    <p>Signature of Siemens Representative:</p>
-                    <p>With Name, Designation & Date</p>
+        <footer class="custom-footer">
+            <div class="container">
+                <div class="signature-container left">
+                    <div class="signature">
+                        <label for="signatureImage1" class="upload-button" id="uploadButton1"></label>
+                        <input type="file" id="signatureImage1" accept="image/*" required>
+                        <p>Signature of Siemens Representative:</p>
+                        <p>With Name, Designation & Date</p>
+                    </div>
+                </div>
+                <div class="signature-container right">
+                    <div class="rsign">
+                        <label for="signatureImage2" class="upload-button" id="uploadButton2"></label>
+                        <input type="file" id="signatureImage2" accept="image/*" required>
+                        <p>Signature of Railway Representative:</p>
+                        <p>With Name, Designation & Date</p>
+                    </div>
                 </div>
             </div>
-            <div class="signature-container right">
-                <div class="rsign">
-                    <label for="signatureImage2" class="upload-button" id="uploadButton1"></label>
-
-                    
-                    <p>Signature of Railway Representative:</p>
-                    <p>With Name, Designation & Date</p>
-                </div>
-            </div>
-        </div>
-       
+        </footer>
+        
         
         <div class="page-break"></div>
                
@@ -641,26 +631,27 @@ td::after {
             
            
                 <br>
-                <div class="container">
-                    <div class="signature-container left">
-                        <div class="signature">
-                            <label for="signatureImage1" class="upload-button" id="uploadButton1"></label>
-                            <input type="file" id="signatureImage1" accept="image/*" required>
-        
-                            <p>Signature of Siemens Representative:</p>
-                            <p>With Name, Designation & Date</p>
+                <footer class="custom-footer">
+                    <div class="container">
+                        <div class="signature-container left">
+                            <div class="signature">
+                                <label for="signatureImage1" class="upload-button" id="uploadButton1"></label>
+                                <input type="file" id="signatureImage1" accept="image/*" required>
+                                <p>Signature of Siemens Representative:</p>
+                                <p>With Name, Designation & Date</p>
+                            </div>
+                        </div>
+                        <div class="signature-container right">
+                            <div class="rsign">
+                                <label for="signatureImage2" class="upload-button" id="uploadButton2"></label>
+                                <input type="file" id="signatureImage2" accept="image/*" required>
+                                <p>Signature of Railway Representative:</p>
+                                <p>With Name, Designation & Date</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="signature-container right">
-                        <div class="rsign">
-                            <label for="signatureImage2" class="upload-button" id="uploadButton1"></label>
-        
-                            
-                            <p>Signature of Railway Representative:</p>
-                            <p>With Name, Designation & Date</p>
-                        </div>
-                    </div>
-                </div>
+                </footer>
+                
         
                 <div class="page-break"></div>
                 <table id="table1">
@@ -1760,7 +1751,7 @@ td::after {
                 <p  style="padding-left: 75px;"><b>Power supply and switch on the power supply. 
                 </b></p>
                 <div class="image-container">
-                    <img src="/images/page10.png" alt="Description of the image" class="responsive-image">
+                    <img src="http://localhost:3000/image2" alt="Description of the image" class="responsive-image">
 
                 </div>
                 <div class="container">
@@ -4192,8 +4183,8 @@ td::after {
     <p style="padding-left: 65px;text-decoration: underline;"><b><u>Temperature correction factor for conductor resistance for annealed high conductivity copper.</u>
 
     </b></p>
-    <img src="/images/page23corr%20fact.png" style="width: 95%; padding: 29px;" alt="Description of the image">
-
+    <img src="http://localhost:3000/image3" style="width: 95%; padding: 29px;" alt="Description">
+    
 
 
    <div class="container">
@@ -4380,6 +4371,7 @@ td::after {
                 </div>
             </div>
         </div>
+        
 
     <div class="page-break"></div>
 
@@ -4640,9 +4632,11 @@ td::after {
     <br>
     <br>
     <div class="image-container">
-        <img src="/images/page24.png" alt="Description of the image" class="responsive-image">
+        <img src="http://localhost:3000/image4" alt="Description of the image" class="responsive-image">
 
     </div>
+
+   
     <div class="container">
         <div class="signature-container left">
             <div class="signature">
@@ -5032,13 +5026,28 @@ td::after {
                 <td><input type="text" id="z79" name="z79" required></td>
                 <td><input type="text" id="z80" name="z80" required></td>
             </tr>
-
-                
-                
-                   
-            
-        </table>
+</table>
     </div>
+    <div class="container">
+        <div class="signature-container left">
+            <div class="signature">
+                <label for="signatureImage1" class="upload-button" id="uploadButton1"></label>
+                <input type="file" id="signatureImage1" accept="image/*" required>
+        
+                <p>Signature of Siemens Representative:</p>
+                <p>With Name, Designation & Date</p>
+            </div>
+        </div>
+        <div class="signature-container right">
+            <div class="rsign">
+                <label for="signatureImage2" class="upload-button" id="uploadButton1"></label>
+        
+                
+                <p>Signature of Railway Representative:</p>
+                <p>With Name, Designation & Date</p>
+            </div>
+        </div>
+        </div>
     <div class="page-break"></div>
 
     <table id="table1">
@@ -5284,7 +5293,8 @@ inductive elements that impede quick discharge of transients and surges to groun
     <p style="padding-left: 75px;">Connect the ACM module to configuration PC. Open version window on menu bar and check ACM software MD4 as 
         shown in below screen.</p>
         <div class="image-container">
-            <img src="C:\Users\karth\Pictures\Screenshots\page31.png" alt="Description of the image" class="responsive-image">
+            <img src="http://localhost:3000/image6" alt="Description of the image" class="responsive-image">
+    
         </div>
         <div class="container">
             <div class="signature-container left">
@@ -5326,8 +5336,10 @@ inductive elements that impede quick discharge of transients and surges to groun
 
 
     </b></p>
-    <img src="/images/page33mat%20des.png" style="width: 95%; padding: 29px;" alt="Description of the image">
+    <img src="http://localhost:3000/image5" style="width: 95%; padding: 29px;" alt="Description">
+    
 
+    
    <div class="container">
             <div class="signature-container left">
                 <div class="signature">
@@ -5367,10 +5379,11 @@ inductive elements that impede quick discharge of transients and surges to groun
             </u></b></P>
             <p style="padding-left: 75px;"><b>Diagnostic PC System Requirements: </b></p>
             <div class="image-container">
-                <img src="/images/page34.png" alt="Description of the image" class="responsive-image">
-
+                <img src="http://localhost:3000/image7" alt="Description of the image" class="responsive-image">
+        
             </div>
             <p  style="padding-left: 75px;"><b>Note: Perstation one diagnostic PC is required for Diagnosis and Configuration purpose of ACM 200 via Webpage.</b></p>
+
             <div class="container">
                 <div class="signature-container left">
                     <div class="signature">
