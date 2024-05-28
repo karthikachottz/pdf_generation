@@ -1,19 +1,44 @@
 const express = require('express');
-const puppeteer = require('puppeteer-core');
+const puppeteer = require('puppeteer');
 const path = require('path');
-const { fontSize } = require('pdfkit');
 
 const app = express();
 const port = 3000;
 
 // Middleware to parse JSON bodies
 app.use(express.json());
-app.use('/images', express.static(path.join(__dirname, 'images')));
 
 // Serve the HTML form with form validation
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '2-20.html'));
 });
+
+// Serve each image
+app.get('/image1', (req, res) => {
+    res.sendFile(path.join(__dirname, 'image.jpg'));
+});
+
+app.get('/image2', (req, res) => {
+    res.sendFile(path.join(__dirname, 'image2.jpg'));
+});
+app.get('/image3', (req, res) => {
+    res.sendFile(path.join(__dirname, 'image3.jpg'));
+});
+
+app.get('/image4', (req, res) => {
+    res.sendFile(path.join(__dirname, 'image4.jpg'));
+});
+app.get('/image5', (req, res) => {
+    res.sendFile(path.join(__dirname, 'image5.jpg'));
+});
+
+app.get('/image6', (req, res) => {
+    res.sendFile(path.join(__dirname, 'image6.jpg'));
+});
+app.get('/image7', (req, res) => {
+    res.sendFile(path.join(__dirname, 'image7.jpg'));
+});
+
 
 // Generate PDF endpoint
 app.post('/generate-pdf', async (req, res) => {
@@ -158,23 +183,6 @@ app.post('/generate-pdf', async (req, res) => {
             /*margin-bottom: 10px;  Add margin at the bottom */
             text-align: left; /* Align text to the left */
         }
-       
-        .signature-container {
-            flex: 1; /* Take up equal space within the container */
-            margin: 0 40px; /* Adjust margin as needed */
-            display: flex; /* Use flexbox for internal alignment */
-            flex-direction: row; /* Arrange items vertically */
-        }
-        
-        .signature-container.left {
-            justify-content: flex-start;
-            bottom: 0px; /* Align items to the start (top) */
-        }
-        
-        .signature-container.right {
-            justify-content: flex-end;
-             /* Align items to the end (bottom) */
-        }
         .responsive-image {
             width: 85%;
             height: auto;
@@ -187,61 +195,73 @@ app.post('/generate-pdf', async (req, res) => {
             width: 85%;
             padding-left: 88px;
         }
+       
+        html, body {
+            height: 100%; /* Make sure the height of html and body is 100% */
+            margin: 0; /* Remove default margin */
+        }
         
+        body {
+            display: flex;
+            flex-direction: column; /* Arrange body content in a column */
+        }
+        
+        /* Main content should take up all available space except for the footer */
+        .main-content {
+            flex: 1; /* Main content takes up remaining space */
+        }
+        
+        /* Footer styling */
+        .custom-footer {
+            background-color: white; /* Set the background color of the footer */
+            padding: 20px 50px; /* Adjust padding for positioning */
+            text-align: center; /* Center align the content */
+            display: flex; /* Use flexbox for the footer */
+            justify-content: center; /* Center the footer content */
+            position: relative; /* Ensure the footer is positioned properly */
+            margin-top: auto; /* Push the footer to the bottom */
+        }
+        
+        /* Container styling */
         .container {
             display: flex;
             justify-content: space-between; /* Distribute space between the signature containers */
-            padding: 0 100px; /* Adjust padding to move the right signature container more to the right */
+            width: 100%; /* Ensure the container takes full width */
+            max-width: 1400px; /* Optional: max width for better layout */
+            padding: 0 10px; /* Adjust padding to move the right signature container more to the right */
         }
         
-        
-        .signature {
-            font-size: 13px;
-            text-align: left;
-            margin-left: 55px; 
-            bottom: 0px;
+        /* Signature container styling */
+        .signature-container {
+            flex: 1; /* Take up equal space within the container */
+            display: ; /* Use flexbox for internal alignment */
+            flex-direction: column; /* Arrange items vertically */
         }
         
+        .signature-container.left {
+            justify-content: flex-start; /* Align items to the start (top) */
+            margin-right: 20px; /* Adjust margin as needed */
+        }
+        
+        .signature-container.right {
+            justify-content: flex-end; /* Align items to the end (bottom) */
+            margin-left: 20px; /* Adjust margin as needed */
+        }
+        
+        /* Signature and related content styling */
+        .signature,
         .rsign {
-            font-size: 13px;
-            text-align: right;
-            position: relative;
-            padding-top: 10px;
-            margin-right: 58px; /* Adjust margin-right to create space for the image */
+            font-size: 13px; /* Set the font size */
+            text-align: center; /* Center align the text */
+            margin-bottom: 0px; /* Add spacing between signature content */
         }
         
-        .rsign img {
-            max-width: 100px; /* Adjust image size as needed */
-            display: block;
-            margin: 0 auto; /* Center the image horizontally within the container */
-        }
-        
-        .rsign .upload-button {
-            margin-left: 20px; /* Add spacing between the image and text */
-            display: inline-block;
-            width: 100px;
-            height: 100px;
-            background-color: #ffffff;
-            background-size: cover;
-            background-position: center;
-           
-        }
+        /* Upload button styling */
         
         
-        .upload-button {
-            display: inline-block;
-            width: 100px; /* Set the width of the upload button */
-            height: 100px; /* Set the height of the upload button */
-            background-color: #ffffff; /* Set background color for the upload button */
-            background-size: cover; /* Ensure the background image covers the button */
-            background-position: center;
-            bottom: 0px;
-            margin-top: 50px; /* Center the background image */
-        }
-
-        /* Style to hide the file input */
+        /* Hide the file input */
         input[type="file"] {
-            display: none;
+            display: none; /* Hide the file input */
         }
        
           table {
@@ -285,6 +305,8 @@ app.post('/generate-pdf', async (req, res) => {
                 
             </tr>
         </table>
+        <img src="http://localhost:3000/image1" style="width: 5%;height: 5%; padding-left: 590px;padding-top: 10px;" alt="Description">
+
             <p style="padding-left: 65px;text-align: center;font-size: large;"><b>SIGNAL DIRECTORATE
             </b></p><br>
             <p style="padding-left: 65px;text-align: center;font-size: large;"><b>RESEARCH DESIGNS AND STANDARDS ORGANISATION
@@ -383,29 +405,12 @@ app.post('/generate-pdf', async (req, res) => {
                            
                            </tr>
                           </table>
-                          <div class="container">
-                            <div class="signature-container left">
-                                <div class="signature">
-                                    <label for="signatureImage1" class="upload-button" id="uploadButton1"></label>
-                                    <input type="file" id="signatureImage1" accept="image/*" required>
-                
-                                    <p>Signature of Siemens Representative:</p>
-                                    <p>With Name, Designation & Date</p>
-                                </div>
-                            </div>
-                            <div class="signature-container right">
-                                <div class="rsign">
-                                    <label for="signatureImage2" class="upload-button" id="uploadButton1"></label>
-                
-                                    
-                                    <p>Signature of Railway Representative:</p>
-                                    <p>With Name, Designation & Date</p>
-                                </div>
-                            </div>
-                        </div>
+                         
                        
                         
                         <div class="page-break"></div>
+
+<br>
             <table id="table1">
                 <tr>
                     <th>Page 2 of 34</th>
@@ -501,26 +506,27 @@ app.post('/generate-pdf', async (req, res) => {
             </div>
             <br>
             <br>
+            <footer class="custom-footer">
             <div class="container">
-            <div class="signature-container left">
-                <div class="signature">
-                    <label for="signatureImage1" class="upload-button" id="uploadButton1"></label>
-                    <input type="file" id="signatureImage1" accept="image/*" required>
-
-                    <p>Signature of Siemens Representative:</p>
-                    <p>With Name, Designation & Date</p>
+                <div class="signature-container left">
+                    <div class="signature">
+                        <label for="signatureImage1" class="upload-button" id="uploadButton1"></label>
+                        <input type="file" id="signatureImage1" accept="image/*" required>
+                        <p>Signature of Siemens Representative:</p>
+                        <p>With Name, Designation & Date</p>
+                    </div>
+                </div>
+                <div class="signature-container right">
+                    <div class="rsign">
+                        <label for="signatureImage2" class="upload-button" id="uploadButton2"></label>
+                        <input type="file" id="signatureImage2" accept="image/*" required>
+                        <p>Signature of Railway Representative:</p>
+                        <p>With Name, Designation & Date</p>
+                    </div>
                 </div>
             </div>
-            <div class="signature-container right">
-                <div class="rsign">
-                    <label for="signatureImage2" class="upload-button" id="uploadButton1"></label>
-
-                    
-                    <p>Signature of Railway Representative:</p>
-                    <p>With Name, Designation & Date</p>
-                </div>
-            </div>
-        </div>
+        </footer>
+        
         
 
     <div class="page-break"></div>
@@ -612,27 +618,27 @@ app.post('/generate-pdf', async (req, res) => {
             </tr>
 
         </table>
+        <footer class="custom-footer">
         <div class="container">
-        <div class="signature-container left">
-            <div class="signature">
-                <label for="signatureImage1" class="upload-button" id="uploadButton1"></label>
-                <input type="file" id="signatureImage1" accept="image/*" required>
-
-                <p>Signature of Siemens Representative:</p>
-                <p>With Name, Designation & Date</p>
+            <div class="signature-container left">
+                <div class="signature">
+                    <label for="signatureImage1" class="upload-button" id="uploadButton1"></label>
+                    <input type="file" id="signatureImage1" accept="image/*" required>
+                    <p>Signature of Siemens Representative:</p>
+                    <p>With Name, Designation & Date</p>
+                </div>
+            </div>
+            <div class="signature-container right">
+                <div class="rsign">
+                    <label for="signatureImage2" class="upload-button" id="uploadButton2"></label>
+                    <input type="file" id="signatureImage2" accept="image/*" required>
+                    <p>Signature of Railway Representative:</p>
+                    <p>With Name, Designation & Date</p>
+                </div>
             </div>
         </div>
-        <div class="signature-container right">
-            <div class="rsign">
-                <label for="signatureImage2" class="upload-button" id="uploadButton1"></label>
-
-                
-                <p>Signature of Railway Representative:</p>
-                <p>With Name, Designation & Date</p>
-            </div>
-        </div>
-    </div>
-   
+    </footer>
+    
        
  
         <div class="page-break"></div>
@@ -1381,7 +1387,8 @@ line. <br>
     <p  style="padding-left: 75px;"><b>Power supply and switch on the power supply. 
     </b></p>
     <div class="image-container">
-        <img src="C:\Users\karth\Pictures\Screenshots\page10.png" alt="Description of the image" class="responsive-image">
+        <img src="http://localhost:3000/image2" alt="Description of the image" class="responsive-image">
+
     </div>
     <div class="container">
         <div class="signature-container left">
@@ -1405,7 +1412,7 @@ line. <br>
     </div>
     
 
-        <div class="page-break"></div>
+<div class="page-break"></div>
         <table id="table1">
         <tr>
             <th>Page 11 of 34</th>
@@ -3386,27 +3393,31 @@ Diagnostic Web Page.
 </div>
 </div>
 <div class="page-break"></div>
+
 <table id="table1">
-        <tr>
-            <th>Page 23 of 34</th>
-            <th>Document no.:SI-G-7.1-0624</th>
-            <th>Version:2.0</th>
-            <th>Date of issue:19.11.2019</th>
-        </tr>
-        <tr><td colspan="4" style="text-align:center;">Document Title:Pre-commissioning Check List of Multi Section Digital axle Counter MSDAC Model:ACM 200<br>(Another variant)
-            and Track side Equipment ZP D 43 of M/s Siemens India Ltd.,Mumbai.</td>
-            
-        </tr>
-       
-    </table>
-    <p style="padding-left: 65px;text-decoration: underline;text-align: center;"><b><u>Annexure-'B'</u>
-    </b></p>
-    <p style="padding-left: 65px;text-decoration: underline;"><b><u>Temperature correction factor for conductor resistance for annealed high conductivity copper.</u>
+<tr>
+    <th>Page 23 of 34</th>
+    <th>Document no.:SI-G-7.1-0624</th>
+    <th>Version:2.0</th>
+    <th>Date of issue:19.11.2019</th>
+</tr>
+<tr><td colspan="4" style="text-align:center;">Document Title:Pre-commissioning Check List of Multi Section Digital axle Counter MSDAC Model:ACM 200<br>(Another variant)
+    and Track side Equipment ZP D 43 of M/s Siemens India Ltd.,Mumbai.</td>
+    
+</tr>
 
-    </b></p>
-    <img src="C:\Users\palan\OneDrive\Documents\seimens proj\pdf generate\page23corr fact.png"  style="width: 95%;padding:29px">
+</table>
+<p style="padding-left: 65px;text-decoration: underline;text-align: center;"><b><u>Annexure-'B'</u>
+</b></p>
+<p style="padding-left: 65px;text-decoration: underline;"><b><u>Temperature correction factor for conductor resistance for annealed high conductivity copper.</u>
 
-    <div class="container">
+</b></p>
+<img src="http://localhost:3000/image3" style="width: 95%; padding: 29px;" alt="Description">
+    
+
+ 
+
+<div class="container">
     <div class="signature-container left">
         <div class="signature">
             <label for="signatureImage1" class="upload-button" id="uploadButton1"></label>
@@ -3454,8 +3465,8 @@ Diagnostic Web Page.
             <tr>
                 <td rowspan="6" style="text-align: center;width:5%;">1</td>
                 <td style="width:20%;">4 Spoke wheel</td>
-                <td>${b1}</td>
-                <td>${r1}</td>
+                <td rowspan="6">${b1}</td>
+                <td rowspan="6">${r1}</td>
             </tr>
             <tr><td>Wheel dia with flange</td></tr>
             <tr><td>Wheel width</td></tr>
@@ -3466,8 +3477,8 @@ Diagnostic Web Page.
             <tr>
                 <td rowspan="6" style="text-align: center;width:5%;">2</td>
                 <td style="width:20%;">6 Spoke wheel</td>
-                <td>${b2}</td>
-                <td>${r2}</td>
+                <td rowspan="6">${b2}</td>
+                <td rowspan="6">${r2}</td>
             </tr>
             <tr><td>Wheel dia with flange</td></tr>
             <tr><td>Wheel width</td></tr>
@@ -3478,8 +3489,8 @@ Diagnostic Web Page.
             <tr>
                 <td rowspan="6" style="text-align: center;width:5%;">3</td>
                 <td style="width:20%;"><b>Solid Wheel with 6 Holes</b></td>
-                <td>${b3}</td>
-                <td>${r3}</td>
+                <td rowspan="6">${b3}</td>
+                <td rowspan="6">${r3}</td>
             </tr>
             <tr><td>Wheel dia with flange</td></tr>
             <tr><td>Wheel width</td></tr>
@@ -3490,8 +3501,8 @@ Diagnostic Web Page.
             <tr>
                 <td rowspan="6" style="text-align: center;width:5%;">4</td>
                 <td style="width:20%;">8 Spoke wheel</td>
-                <td>${b4}</td>
-                <td>${r4}</td>
+                <td rowspan="6">${b4}</td>
+                <td rowspan="6">${r4}</td>
             </tr>
             <tr><td>Wheel dia with flange</td></tr>
             <tr><td>Wheel width</td></tr>
@@ -3502,8 +3513,8 @@ Diagnostic Web Page.
             <tr>
                 <td rowspan="6" style="text-align: center;width:5%;">5</td>
                 <td style="width:20%;">6 Spoke with slots</td>
-                <td>${b5}</td>
-                <td>${r5}</td>
+                <td rowspan="6">${b5}</td>
+                <td rowspan="6">${r5}</td>
             </tr>
             <tr><td>Wheel dia with flange</td></tr>
             <tr><td>Wheel width</td></tr>
@@ -3558,8 +3569,8 @@ Diagnostic Web Page.
     <td rowspan="7" style="text-align: center;width:5%;">6</td>
     <td style="width:20%;">Perforated</td>
     
-    <td>${d1}</td>
-    <td>${rem1}</td>
+    <td rowspan="7">${d1}</td>
+    <td rowspan="7">${rem1}</td>
    
 </tr>
 <tr><td>No. of perforation with 
@@ -3575,9 +3586,9 @@ Diagnostic Web Page.
     <td rowspan="5" style="text-align: center;width:5%;">7</td>
     <td style="width:20%;">Solid wheel</td>
    
-    <td>${d2}</td>
+    <td rowspan="7">${d2}</td>
  
-    <td>${rem2}</td>
+    <td rowspan="7">${rem2}</td>
     
 </tr>
 <tr><td>Wheel dia with flange</td></tr>
@@ -3591,9 +3602,9 @@ Diagnostic Web Page.
     <td style="width:20%;"><b>Motor trolley wheel, 
         Solid 
         </b></td>
-        <td>${d3}</td>
+        <td rowspan="5">${d3}</td>
  
-        <td>${rem3}</td>
+        <td rowspan="5">${rem3}</td>
 </tr>
 <tr><td>Wheel dia with flange</td></tr>
 <tr><td>Wheel width</td></tr>
@@ -3605,9 +3616,9 @@ Diagnostic Web Page.
     <td rowspan="5" style="text-align: center;width:5%;">9</td>
     <td style="width:20%;">Rail Dolley Wheel, Solid 
     </td>
-    <td>${d4}</td>
+    <td rowspan="5">${d4}</td>
  
-    <td>${rem4}</td>
+    <td rowspan="5">${rem4}</td>
 </tr>
 <tr><td>Wheel dia with flange</td></tr>
 <tr><td>Wheel width</td></tr>
@@ -3619,9 +3630,9 @@ Diagnostic Web Page.
     <td rowspan="5" style="text-align: center;width:5%;">10</td>
     <td style="width:20%;">Material Trolley Solid 
         wheel </td>
-        <td>${d5}</td>
+        <td rowspan="5">${d5}</td>
  
-    <td>${rem5}</td>
+    <td rowspan="5">${rem5}</td>
 </tr>
 <tr><td>Wheel dia with flange</td></tr>
 <tr><td>Wheel width</td></tr>
@@ -3630,9 +3641,9 @@ Diagnostic Web Page.
 <tr>
     <td rowspan="5" style="text-align: center;width:5%;">11</td>
     <td style="width:20%;">Motor Trolley</td>
-    <td>${d6}</td>
+    <td rowspan="5">${d6}</td>
  
-    <td>${rem6}</td>
+    <td rowspan="5">${rem6}</td>
 </tr>
 <tr><td>Wheel dia with flange</td></tr>
 <tr><td>Wheel width</td></tr>
@@ -3641,9 +3652,9 @@ Diagnostic Web Page.
 <tr>
     <td rowspan="5" style="text-align: center;width:5%;">12</td>
     <td style="width:20%;">Tower wagon</td>
-    <td>${d7}</td>
+    <td rowspan="5">${d7}</td>
  
-    <td>${rem7}</td>
+    <td rowspan="5">${rem7}</td>
 </tr>
 <tr><td>Wheel dia with flange</td></tr>
 <tr><td>Wheel width</td></tr>
@@ -3689,8 +3700,10 @@ Diagnostic Web Page.
     <br>
     <br>
     <div class="image-container">
-        <img src="C:\Users\karth\Pictures\Screenshots\page24.png" alt="Description of the image" class="responsive-image">
+        <img src="http://localhost:3000/image4" alt="Description of the image" class="responsive-image">
+
     </div>
+ 
     <div class="container">
         <div class="signature-container left">
             <div class="signature">
@@ -4073,12 +4086,26 @@ Diagnostic Web Page.
         <td><input type="text" id="z79" name="z79" required></td>
         <td><input type="text" id="z80" name="z80" required></td>
     </tr>
+</table>
+</div><div class="container">
+<div class="signature-container left">
+    <div class="signature">
+        <label for="signatureImage1" class="upload-button" id="uploadButton1"></label>
+        <input type="file" id="signatureImage1" accept="image/*" required>
+
+        <p>Signature of Siemens Representative:</p>
+        <p>With Name, Designation & Date</p>
+    </div>
+</div>
+<div class="signature-container right">
+    <div class="rsign">
+        <label for="signatureImage2" class="upload-button" id="uploadButton1"></label>
 
         
-        
-           
-    
-</table>
+        <p>Signature of Railway Representative:</p>
+        <p>With Name, Designation & Date</p>
+    </div>
+</div>
 </div>
 
 <div class="page-break"></div>
@@ -4304,7 +4331,8 @@ inductive elements that impede quick discharge of transients and surges to groun
     </div>
 </div>
 <div class="page-break"></div>
-
+<table id="table1">
+<tr>
 <th>Page 32 of 34</th>
 <th>Document no.:SI-G-7.1-0624</th>
 <th>Version:2.0</th>
@@ -4323,8 +4351,9 @@ inductive elements that impede quick discharge of transients and surges to groun
 <p style="padding-left: 75px;">Connect the ACM module to configuration PC. Open version window on menu bar and check ACM software MD4 as 
 shown in below screen.</p>
 <div class="image-container">
-<img src="C:\Users\karth\Pictures\Screenshots\page31.png" alt="Description of the image" class="responsive-image">
-</div>
+        <img src="http://localhost:3000/image6" alt="Description of the image" class="responsive-image">
+
+    </div>
 <div class="container">
 <div class="signature-container left">
     <div class="signature">
@@ -4362,12 +4391,14 @@ shown in below screen.</p>
     </table>
     <p style="padding-left: 65px;text-decoration: underline;text-align: center;"><b><u>Annexure-'J'</u>
     </b></p>
-    <p style="padding-left: 65px;text-decoration: underline;text-align: center;"><b><u>Recommended Tool Kit for Testing </u>
+    <p style="padding-left: 65px;text-decoration: underline;text-align: center;"><b><u>Recommended Tool Kit for Testing</u> 
 
 
     </b></p>
-    <img src="C:\Users\palan\OneDrive\Documents\seimens proj\pdf generate\page33mat des.png"  style="width: 95%;padding:29px">
+    <img src="http://localhost:3000/image5" style="width: 95%; padding: 29px;" alt="Description">
+    
 
+   
             
 
     <div class="container">
@@ -4407,8 +4438,9 @@ shown in below screen.</p>
 </u></b></P>
 <p style="padding-left: 75px;"><b>Diagnostic PC System Requirements: </b></p>
 <div class="image-container">
-<img src="C:\Users\karth\Pictures\Screenshots\page34.png" alt="Description of the image" class="responsive-image">
-</div>
+        <img src="http://localhost:3000/image7" alt="Description of the image" class="responsive-image">
+
+    </div>
 <p  style="padding-left: 75px;"><b>Note: Perstation one diagnostic PC is required for Diagnosis and Configuration purpose of ACM 200 via Webpage.</b></p>
 <div class="container">
 <div class="signature-container left">
@@ -4639,12 +4671,17 @@ shown in below screen.</p>
 
         // Generate PDF
        // Generate PDF
+       await page.evaluate(() => {
+        document.querySelector('img[src="http://localhost:3000/image1"]').src = 'http://localhost:3000/image1'; // Replace placeholder1 with the actual URL
+        document.querySelector('img[src="http://localhost:3000/image2"]').src = 'http://localhost:3000/image2'; // Replace placeholder2 with the actual URL
+        // Add more lines to replace placeholders for additional images
+      });
        const pdfBuffer = await page.pdf({
        
         format: 'A3',
         displayHeaderFooter: false,
         printBackground: true,
-        pageRanges: '1-35', // Generate only page 1
+        pageRanges: '1-36', // Generate only page 1
        
         margin: {
           top: '50',
