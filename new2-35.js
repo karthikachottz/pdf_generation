@@ -4,6 +4,10 @@ const path = require('path');
 
 const app = express();
 const port = 3000;
+app.use((req, res, next) => {
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+  next();
+});
 
 // Middleware to parse JSON bodies
 app.use(express.json());
@@ -425,6 +429,7 @@ app.post('/generate-pdf', async (req, res) => {
             </table>
             <div class="table-container">
                 <h2 style="text-align: center;"><span>3.</span><span ><u><b>General Information</b></u></span></h2>
+                <label for="division">Division/Zonal Railway:</label>
                 <table>
                     <tr>
                         <td style="width:5%">1</td>
