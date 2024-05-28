@@ -87,10 +87,26 @@ app.post('/generate-pdf', async (req, res) => {
 } = req.body;
 
     try {
-        const browser = await puppeteer.launch({
-            executablePath: 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe' // Provide your Chrome executable path here
-        });
+       const puppeteer = require('puppeteer');
 
+    (async () => {
+        let browser;
+        let executablePath;
+
+        // Detect the browser
+        const isChrome = navigator.userAgent.includes("Chrome");
+        if (isChrome) {
+            executablePath = 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe';
+        } else {
+            // For Firefox or other browsers, you can set a default executable path or handle differently
+            executablePath = '/path/to/firefox';
+            // You can also provide instructions to the user to download a specific browser if needed
+        }
+
+        // Launch the browser with the detected executable path
+        browser = await puppeteer.launch({
+            executablePath: executablePath
+        });
         const page = await browser.newPage();
         // CSS styles
      
@@ -4679,6 +4695,10 @@ shown in below screen.</p>
         document.querySelector('img[src="/image2"]').src = '/image2'; // Replace placeholder2 with the actual URL
         // Add more lines to replace placeholders for additional images
       });
+              // Capture a screenshot or generate a PDF
+        await page.screenshot({ path: 'example.png' });
+        // await page.pdf({ path: 'example.pdf', format: 'A4' });
+
        const pdfBuffer = await page.pdf({
        
         format: 'A3',
@@ -4701,9 +4721,9 @@ shown in below screen.</p>
         await browser.close();
 
         // Send the PDF as a response
-        res.setHeader('Content-Type', 'application/pdf');
-        res.setHeader('Content-Disposition', 'attachment; filename="form_submission.pdf"');
-        res.send(pdfBuffer);
+        //res.setHeader('Content-Type', 'application/pdf');
+       // res.setHeader('Content-Disposition', 'attachment; filename="form_submission.pdf"');
+        //res.send(pdfBuffer);
     } catch (error) {
         console.error('Error generating PDF:', error);
         res.status(500).send('Internal Server Error');
